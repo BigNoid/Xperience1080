@@ -74,7 +74,15 @@ msgctxt "#41114"
 msgid "Bottom"
 msgstr ""
 
-#empty strings from id 41115 to 41129
+msgctxt "#41115"
+msgid "Right Side of Widget"
+msgstr ""
+
+msgctxt "#41116"
+msgid "Left Side of Widget"
+msgstr ""
+
+#empty strings from id 41117 to 41129
 #Home
 
 msgctxt "#41130"
@@ -191,7 +199,7 @@ msgid "App Tile"
 msgstr ""
 
 msgctxt "#41160"
-msgid "Animate Icon"
+msgid "Animate Icons"
 msgstr ""
 
 msgctxt "#41161"
@@ -692,7 +700,23 @@ msgctxt "#41556"
 msgid "Featured Albums"
 msgstr ""
 
-#empty strings from id 41557 to 41561
+msgctxt "#41557"
+msgid "Top Box Office"
+msgstr ""
+
+msgctxt "#41558"
+msgid "Top Rentals"
+msgstr ""
+
+msgctxt "#41559"
+msgid "New DVD Releases"
+msgstr ""
+
+msgctxt "#41560"
+msgid "Coming Soon to DVD"
+msgstr ""
+
+#empty strings from id 41561 to 41561
 
 msgctxt "#41562"
 msgid "Loading Weather..."
@@ -706,7 +730,23 @@ msgctxt "#41564"
 msgid "Loading"
 msgstr ""
 
-#empty strings from id 41565 to 41599
+msgctxt "#41565"
+msgid "Random Albums"
+msgstr ""
+
+msgctxt "#41566"
+msgid "Recent Albums"
+msgstr ""
+
+msgctxt "#41567"
+msgid "Recommended Albums"
+msgstr ""
+
+msgctxt "#41568"
+msgid "Random Songs"
+msgstr ""
+
+#empty strings from id 41569 to 41599
 #Includes_Window-Contents.xml
 #From 41600 to 41619
 

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<shortcuts>
+	<shortcut>
+		<label></label>
+		<label2></label2>
+		<icon>windows/home/icons/addtile.png</icon>
+		<action>RunScript(script.skinshortcuts,type=manage&amp;group=movies2)</action>
+		<defaultID>1</defaultID>
+	</shortcut>
+	<shortcut>
+		<label></label>
+		<label2></label2>
+		<icon>windows/home/icons/addtile.png</icon>
+		<action>RunScript(script.skinshortcuts,type=manage&amp;group=movies2)</action>
+		<defaultID>2</defaultID>
+	</shortcut>
+</shortcuts>

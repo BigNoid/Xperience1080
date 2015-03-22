@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<shortcuts>
+	<shortcut>
+		<label>$LOCALIZE[342]</label>
+		<label2>$INFO[Window.Property(Movies.Count)]</label2>
+		<icon>windows/home/icons/video.png</icon>
+		<action>ActivateWindow(videos,recentlyaddedmovies,return)</action>
+		<defaultID>3</defaultID>
+	</shortcut>
+	<shortcut>
+		<label>$LOCALIZE[1037]</label>
+		<label2></label2>
+		<icon>windows/home/icons/videoaddons.png</icon>
+		<action>ActivateWindow(videos,addons,return)</action>
+		<defaultID>4</defaultID>
+	</shortcut>
+</shortcuts>

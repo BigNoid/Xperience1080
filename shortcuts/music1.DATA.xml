@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<shortcuts>
+	<shortcut>
+		<label>$LOCALIZE[2]</label>
+		<label2>$INFO[Window.Property(Music.AlbumsCount)]</label2>
+		<icon>windows/home/icons/music.png</icon>
+		<action>ActivateWindow(music)</action>
+		<defaultID>3</defaultID>
+	</shortcut>
+	<shortcut>
+		<label>$LOCALIZE[1038]</label>
+		<label2></label2>
+		<icon>windows/home/icons/addons.png</icon>
+		<action>ActivateWindow(music,addons,return)</action>
+		<defaultID>4</defaultID>
+	</shortcut>
+</shortcuts>

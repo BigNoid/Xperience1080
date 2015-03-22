@@ -392,9 +392,9 @@
                     <control type="radiobutton" id="2004">
                         <width>1210</width>
                         <include>SettingsCategoryRadioButtonVars</include>
-                        <selected>!Skin.HasSetting(HideHomeSubmenuArrow)</selected>
-                        <onclick>Skin.ToggleSetting(HideHomeSubmenuArrow)</onclick>
-                        <label>$LOCALIZE[41135]</label>
+                        <selected>!Skin.HasSetting(HomeTile.Animate)</selected>
+                        <onclick>Skin.ToggleSetting(HomeTile.Animate)</onclick>
+                        <label>$LOCALIZE[41160]</label>
                     </control>								
                     <control type="group" id="2007">
                         <description>Fake spin control</description>

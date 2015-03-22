@@ -5,6 +5,7 @@
     <onload>SetProperty(fanart_image,$INFO[ListItem.Art(fanart)],home)</onload>
     <onload condition="Skin.HasSetting(MovieInformation.PlayTrailer)">AlarmClock(PlayTrailer,PlayMedia($INFO[ListItem.Trailer],false,1),00:01,silent)</onload>
     <onunload>ClearProperty(fanart_image,home)</onunload>
+    <onunload>ClearProperty(FanartZoom,movieinformation)</onunload>
     <allowoverlay>no</allowoverlay>
     <controls>
         <!-- Movies, TVShows, Seasons, Episodes -->
@@ -29,7 +30,7 @@
                 <effect type="slide" start="0" end="-2320" time="500" delay="0" tween="sine" easing="inout" />
             </animation>
 
-            <visible>!Window.IsActive(script-Actors-DialogInfo.xml) + !Window.IsActive(script-Actors-DialogInfo.xml) + IsEmpty(Window(Home).Property(script.metadata.actors.hasparent)) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
+            <visible>!Window.IsActive(script-ExtendedInfo Script-DialogInfo.xml) + !Window.IsActive(script-ExtendedInfo Script-DialogInfo.xml) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
             
             <!-- Title Label -->
             <control type="group">
@@ -233,7 +234,7 @@
                     <textcolor>eewhite</textcolor>
                     <align>left</align>
                     <scroll>false</scroll>
-                    <animation effect="fade" start="100" end="50" time="200" tween="sine" easing="inout" condition="Control.HasFocus(9334) | Control.HasFocus(50) | Control.HasFocus(1110) | Window.IsActive(script-Actors-DialogInfo.xml) | Window.IsActive(3004) | [!IsEmpty(Window(3004).Property(ChooseArt)) + [Window.IsActive(filebrowser) | Window.IsActive(selectdialog) | Window.IsActive(DialogSelect.xml)]]">Conditional</animation>
+                    <animation effect="fade" start="100" end="50" time="200" tween="sine" easing="inout" condition="Control.HasFocus(9334) | Control.HasFocus(50) | Control.HasFocus(1110) | Window.IsActive(script-ExtendedInfo Script-DialogInfo.xml) | Window.IsActive(3004) | [!IsEmpty(Window(3004).Property(ChooseArt)) + [Window.IsActive(filebrowser) | Window.IsActive(selectdialog) | Window.IsActive(DialogSelect.xml)]]">Conditional</animation>
                 </control>
                 <!-- Cast Label -->
                 <control type="label">
@@ -246,7 +247,7 @@
                     <textcolor>eewhite</textcolor>
                     <align>left</align>
                     <scroll>false</scroll>  
-                    <animation effect="fade" start="100" end="50" time="200" tween="sine" easing="inout" condition="Control.HasFocus(9333) | Control.HasFocus(9335) | Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105) | Control.HasFocus(1110) | Control.HasFocus(70) | Control.HasFocus(71) | Window.IsActive(script-Actors-DialogInfo.xml) | [!IsEmpty(Window(3004).Property(ChooseArt)) + [Window.IsActive(filebrowser) | Window.IsActive(selectdialog) | Window.IsActive(DialogSelect.xml)]]">Conditional</animation>
+                    <animation effect="fade" start="100" end="50" time="200" tween="sine" easing="inout" condition="Control.HasFocus(9333) | Control.HasFocus(9335) | Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105) | Control.HasFocus(1110) | Control.HasFocus(70) | Control.HasFocus(71) | Window.IsActive(script-ExtendedInfo Script-DialogInfo.xml) | [!IsEmpty(Window(3004).Property(ChooseArt)) + [Window.IsActive(filebrowser) | Window.IsActive(selectdialog) | Window.IsActive(DialogSelect.xml)]]">Conditional</animation>
                      <visible>IntegerGreaterThan(Container(50).NumItems,0)</visible>
                 </control>
                 <!-- Right Arrow Label -->
@@ -262,14 +263,14 @@
                     <scroll>false</scroll>
                     <include>visiblehidefadeinfo</include>
                     <animation effect="fade" start="100" end="0" tween="sine" easing="inout" time="300" condition="!Control.HasFocus(50)">Conditional</animation>
-                    <visible>System.HasAddon(script.metadata.actors) + !Container.Content(musicvideos)</visible>
+                    <visible>System.HasAddon(script.extendedinfo) + !Container.Content(musicvideos)</visible>
                 </control>
             </control>
             
             <!-- Info Stuff -->
             <control type="group">
                 <include>FullscreenDimensions</include>
-                <visible allowhiddenfocus="true">Control.HasFocus(9333) | Control.HasFocus(9335) | Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105) | Control.HasFocus(1110) | Control.HasFocus(70) | Control.HasFocus(71) | [!IsEmpty(Window(3004).Property(ChooseArt)) + [Window.IsActive(filebrowser) | Window.IsActive(selectdialog) | Window.IsActive(DialogSelect.xml)]]</visible>
+                <visible allowhiddenfocus="true">Control.HasFocus(9337) | Control.HasFocus(9333) | Control.HasFocus(9335) | Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105) | Control.HasFocus(1110) | Control.HasFocus(70) | Control.HasFocus(71) | [!IsEmpty(Window(3004).Property(ChooseArt)) + [Window.IsActive(filebrowser) | Window.IsActive(selectdialog) | Window.IsActive(DialogSelect.xml)]]</visible>
                 <include>listEndAnimation</include>
                 <animation type="Visible">
                     <effect type="slide" start="-1920" end="0" time="500" delay="0" tween="sine" easing="inout" />
@@ -305,122 +306,6 @@
                     <texture border="3">views/list/panel/panel.png</texture>
                 </control>
                 
-                <!-- Fanart / Thumb / Overlay -->
-                <control type="group">
-                    <posx>100</posx>
-                    <posy>220</posy>
-                    <control type="group">
-                        <visible>!Player.HasVideo</visible>
-                        <include>visiblehidefadeinfo</include>
-                        <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
-                            <width>634</width>
-                            <height>355</height>
-                            <aspectratio>scale</aspectratio>
-                            <texture background="true">$VAR[VideoInfoArt]</texture>
-                        </control>
-                        <control type="image">
-                            <posx>534</posx>
-                            <posy>0</posy>
-                            <width>100</width>
-                            <height>100</height>
-                            <texture>$VAR[VideoInfoOverlay]</texture>
-                        </control>
-                    </control>
-                    <control type="group">
-                        <visible>Player.HasVideo</visible>
-                        <include>visiblehidefadeinfo</include>
-                        <control type="image">
-                            <description>black</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
-                            <width>634</width>
-                            <height>355</height>
-                            <texture border="1">windows/common/black.png</texture>
-                        </control>
-                        <control type="videowindow">
-                            <description>video</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
-                            <width>634</width>
-                            <height>356</height>
-                            <aspectratio>stretch</aspectratio>
-                            <include>visiblehidefadeinfo</include>
-                            <visible>Window.IsActive(movieinformation)</visible>
-                        </control>
-                    </control>
-                </control>
-                
-                <!-- OSD Back -->
-                <control type="image">
-                    <posx>324</posx>
-                    <posy>500</posy>
-                    <width>188</width>
-                    <height>59</height>
-                    <texture>dialogs/video-info/osd-back.png</texture>
-                    <animation effect="fade" start="100" end="0" time="300" tween="sine" easing="inout" condition="![Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105)]">Conditional</animation>
-                    <include>visiblehidefade</include>
-                    <visible>Player.HasVideo</visible>
-                </control>
-
-                <control type="group" id="9336">
-                    <posx>329</posx>
-                    <posy>500</posy>
-                    <width>177</width>
-                    <height>59</height>
-                    <animation effect="fade" start="100" end="0" time="300" tween="sine" easing="inout" condition="![Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105)]">Conditional</animation>
-                    <control type="button" id="1101">
-                        <posx>0</posx>
-                        <posy>0</posy>
-                        <width>59</width>
-                        <height>59</height>
-                        <onleft>1105</onleft>
-                        <onright>1104</onright>
-                        <onup>9333</onup>
-                        <ondown>9333</ondown>
-                        <onclick>PlayerControl(Stop)</onclick>
-                        <onclick>SetFocus(9333)</onclick>
-                        <texturefocus>dialogs/video-info/osd-stop.png</texturefocus>
-                        <texturenofocus>dialogs/video-info/osd-stop-nf.png</texturenofocus>
-                        <visible>Player.HasVideo</visible>
-                        <enable>Player.HasVideo</enable>
-                    </control>
-                    <control type="togglebutton" id="1104">
-                        <posx>59</posx>
-                        <posy>0</posy>
-                        <width>59</width>
-                        <height>59</height>
-                        <onleft>1101</onleft>
-                        <onright>1105</onright>
-                        <onup>9333</onup>
-                        <ondown>9333</ondown>
-                        <onclick>PlayerControl(Play)</onclick>
-                        <texturefocus>dialogs/video-info/osd-play.png</texturefocus>
-                        <texturenofocus>dialogs/video-info/osd-play-nf.png</texturenofocus>
-                        <alttexturefocus>dialogs/video-info/osd-pause.png</alttexturefocus>
-                        <alttexturenofocus>dialogs/video-info/osd-pause-nf.png</alttexturenofocus>
-                        <usealttexture>!Player.IsPaused</usealttexture>
-                        <visible>Player.HasVideo</visible>
-                        <enable>Player.HasVideo</enable>
-                    </control>
-                    <control type="button" id="1105">
-                        <posx>118</posx>
-                        <posy>0</posy>
-                        <width>59</width>
-                        <height>59</height>
-                        <onleft>1104</onleft>
-                        <onright>1101</onright>
-                        <onup>9333</onup>
-                        <ondown>9333</ondown>
-                        <onclick>Action(fullscreen)</onclick>
-                        <texturefocus>dialogs/video-info/osd-fs.png</texturefocus>
-                        <texturenofocus>dialogs/video-info/osd-fs-nf.png</texturenofocus>
-                        <visible>Player.HasVideo</visible>
-                        <enable>Player.HasVideo</enable>
-                    </control>
-                </control>
-                
                 <control type="list" id="9333">
                     <posx>100</posx>
                     <posy>576</posy>
@@ -432,7 +317,7 @@
                     <onright condition="!Control.IsVisible(70) + !Control.IsVisible(71) + !IntegerGreaterThan(Container(50).NumItems,0)">SetProperty(BounceRight,1,Home)</onright>
                     <onright condition="!Control.IsVisible(70) + !Control.IsVisible(71) + IntegerGreaterThan(Container(50).NumItems,0)">SendClick(2003,5)</onright>
                     <onright condition="!Control.IsVisible(70) + !Control.IsVisible(71) + IntegerGreaterThan(Container(50).NumItems,0)">SetFocus(9334)</onright>
-                    <onup condition="!Player.HasVideo">9333</onup>
+                    <onup condition="!Player.HasVideo">9337</onup>
                     <onup condition="Player.HasVideo">9336</onup>
                     <ondown condition="!Player.HasVideo">9333</ondown>
                     <ondown condition="Player.HasVideo">9336</ondown>
@@ -638,8 +523,38 @@
                             <height>36</height>
                             <font>Font-Condensed-S34</font>
                             <align>left</align>
-                            <label>$INFO[ListItem.Year,, • ]$INFO[ListItem.Duration,, $LOCALIZE[12391]]$INFO[ListItem.RatingAndVotes, • ★ ,]</label>
+                            <label>$INFO[ListItem.Year,, • ]$INFO[ListItem.Duration,, $LOCALIZE[12391]]$INFO[ListItem.RatingAndVotes, • ★ ,]$INFO[ListItem.Top250, • $LOCALIZE[13409] #,]</label>
                             <textcolor>aawhite</textcolor>
+                            <scroll>false</scroll>
+                            <visible>!Container.Content(episodes)</visible>
+                        </control>
+                        <control type="label">
+                            <posx>8</posx>
+                            <posy>0</posy>
+                            <width>1044</width>
+                            <height>36</height>
+                            <font>Font-Condensed-S34</font>
+                            <align>left</align>
+                            <label>$INFO[ListItem.Premiered,, • ]$INFO[ListItem.Duration,, $LOCALIZE[12391]]$INFO[ListItem.RatingAndVotes, • ★ ,]</label>
+                            <textcolor>aawhite</textcolor>
+                            <scroll>false</scroll>
+                            <visible>Container.Content(episodes)</visible>
+                        </control>
+                    </control>
+                    <control type="group">
+                        <width>1044</width>
+                        <height>40</height>
+                        <visible>Container.Content(TVShows) + !IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
+                        <!-- NextDate -->
+                        <control type="label">
+                            <posx>8</posx>
+                            <posy>0</posy>
+                            <width>1044</width>
+                            <height>36</height>
+                            <font>Font-Condensed-S34</font>
+                            <align>left</align>
+                            <label>$INFO[Window(Home).Property(NextAired.NextNumber),→ ,]$INFO[Window(Home).Property(NextAired.NextTitle), ,]$INFO[Window(Home).Property(NextAired.NextDate), (,)]</label>
+                            <textcolor>ddwhite</textcolor>
                             <scroll>false</scroll>
                         </control>
                     </control>
@@ -655,7 +570,7 @@
                             <height>36</height>
                             <font>Font-Condensed-S34</font>
                             <align>left</align>
-                            <label>$INFO[ListItem.Premiered,$LOCALIZE[41314],]</label>
+                            <label>$INFO[ListItem.Premiered,$LOCALIZE[41314],]$INFO[[Window(Home).Property(NextAired.Runtime),, $LOCALIZE[12391]]</label>
                             <textcolor>aawhite</textcolor>
                             <scroll>false</scroll>
                         </control>
@@ -732,40 +647,6 @@
                             <align>left</align>
                             <label>$INFO[ListItem.Genre]</label>
                             <textcolor>aawhite</textcolor>
-                            <scroll>false</scroll>
-                        </control>
-                    </control>
-                    <control type="group">
-                        <width>1044</width>
-                        <height>40</height>
-                        <visible>Container.Content(TVShows) + !IsEmpty(Window(Home).Property(NextAired.Status))</visible>
-                        <!-- Studio -->
-                        <control type="label">
-                            <posx>8</posx>
-                            <posy>0</posy>
-                            <width>1044</width>
-                            <height>36</height>
-                            <font>Font-Condensed-S34</font>
-                            <align>left</align>
-                            <label>$INFO[Window(Home).Property(NextAired.Status)]</label>
-                            <textcolor>aawhite</textcolor>
-                            <scroll>false</scroll>
-                        </control>
-                    </control>
-                    <control type="group">
-                        <width>1044</width>
-                        <height>40</height>
-                        <visible>Container.Content(TVShows) + !IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
-                        <!-- Studio -->
-                        <control type="label">
-                            <posx>8</posx>
-                            <posy>0</posy>
-                            <width>1044</width>
-                            <height>36</height>
-                            <font>Font-Condensed-S34</font>
-                            <align>left</align>
-                            <label>$INFO[Window(Home).Property(NextAired.NextNumber),→ ,]$INFO[Window(Home).Property(NextAired.NextTitle), ,]$INFO[Window(Home).Property(NextAired.NextDate), (,)]</label>
-                            <textcolor>ddwhite</textcolor>
                             <scroll>false</scroll>
                         </control>
                     </control>
@@ -902,11 +783,12 @@
                         <width>1045</width>
                         <height>270</height>
                         <label>$INFO[ListItem.Plot]</label>
-                        <textcolor>bbwhite</textcolor>
+                        <textcolor>eewhite</textcolor>
                         <align>justify</align>
                         <font>Font-Condensed-S40</font>
                         <autoscroll time="2000" delay="10000" repeat="10000">Window.IsActive(movieinformation) + !Control.HasFocus(70) + [Control.HasFocus(9333) | Control.HasFocus(71) | ControlGroup(9336).HasFocus] + !Window.IsActive(3004) + !Skin.HasSetting(AutoScroll.Disable)</autoscroll>
                         <pagecontrol>70</pagecontrol>
+                        <animation effect="fade" start="100" end="71.5" time="300" tween="sine" easing="inout" condition="!Control.HasFocus(70)">Conditional</animation>
                     </control>
                     <!-- Scrollbar -->
                     <control type="image">
@@ -939,6 +821,165 @@
                         <visible>!IsEmpty(ListItem.Plot)</visible>
                     </control>
                 </control>          
+
+                <!-- Path-->
+                <control type="label">
+                    <posx>770</posx>
+                    <posy>854</posy>
+                    <width>1044</width>
+                    <height>70</height>
+                    <font>Font-Condensed-S30</font>
+                    <align>left</align>
+                    <label>$INFO[ListItem.FileNameAndPath]</label>
+                    <textcolor>FF2C2C2C</textcolor>
+                    <haspath>true</haspath>
+                </control>
+
+                <!-- Fanart / Thumb / Overlay -->
+                <control type="group">
+                    <posx>100</posx>
+                    <posy>220</posy>
+                    <control type="group">
+                    	<visible>!Player.HasVideo</visible>
+                    	<include>visiblehidefadeinfo</include>
+                    	<control type="button" id="9337">
+                    		<description>Fanart Zoom</description>
+                    		<onup>9333</onup>
+                    		<onleft>1110</onleft>
+                    		<onright condition="Control.IsVisible(70)">70</onright>
+                    		<onright condition="!Control.IsVisible(70)">71</onright>
+                    		<onback>ClearProperty(FanartZoom,movieinformation)</onback>
+                    		<ondown>9333</ondown>
+                    		<onclick condition="IsEmpty(Window(movieinformation).Property(FanartZoom))">SetProperty(FanartZoom,True,movieinformation)</onclick>
+                    		<onclick condition="!IsEmpty(Window(movieinformation).Property(FanartZoom))">ClearProperty(FanartZoom,movieinformation)</onclick>
+                    	</control>
+                    	<control type="image">
+                    		<posx>-21</posx>
+                    		<posy>-21</posy>
+                    		<width>676</width>
+                    		<height>397</height>
+                    		<texture border="40">windows/home/tile-fo.png</texture>
+                    		<visible>Control.HasFocus(9337)</visible>
+                    		<animation type="Visible" reversible="false">
+                    			<effect type="fade" start="0" end="100" time="150" tween="sine" easing="inout" />
+                    		</animation>
+                    		<animation type="Hidden" reversible="false">
+                    			<effect type="fade" start="100" end="0" time="150" tween="sine" easing="inout" />
+                    		</animation>
+                    		<animation effect="zoom" start="-21,-21,676,397" end="-121,-241,1944,1112" time="640" tween="cubic" condition="!IsEmpty(Window(movieinformation).Property(FanartZoom))">Conditional</animation>
+                    	</control>
+                    	<control type="image">
+                    		<posx>0</posx>
+                    		<posy>0</posy>
+                    		<width>634</width>
+                    		<height>355</height>
+                    		<aspectratio>scale</aspectratio>
+                    		<texture background="true">$VAR[VideoInfoArt]</texture>
+                    		<animation effect="zoom" start="0,0,634,355" end="-100,-220,1920,1080" time="640" tween="cubic" condition="!IsEmpty(Window(movieinformation).Property(FanartZoom))">Conditional</animation>
+                    	</control>
+                    	<control type="image">
+                    		<posx>534</posx>
+                    		<posy>0</posy>
+                    		<width>100</width>
+                    		<height>100</height>
+                    		<texture>$VAR[VideoInfoOverlay]</texture>
+                    		<visible>IsEmpty(Window(movieinformation).Property(FanartZoom))</visible>
+                    		<include>visiblehidefadeinfo</include>
+                    		<animation effect="zoom" start="534,0,100,100" end="1620,-220,200,200" time="640" tween="cubic" condition="!IsEmpty(Window(movieinformation).Property(FanartZoom))">Conditional</animation>
+                    	</control>
+                    </control>
+                    <control type="group">
+                        <visible>Player.HasVideo</visible>
+                        <include>visiblehidefadeinfo</include>
+                        <control type="image">
+                            <description>black</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>634</width>
+                            <height>355</height>
+                            <texture border="1">windows/common/black.png</texture>
+                        </control>
+                        <control type="videowindow">
+                            <description>video</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>634</width>
+                            <height>356</height>
+                            <aspectratio>stretch</aspectratio>
+                            <include>visiblehidefadeinfo</include>
+                            <visible>Window.IsActive(movieinformation)</visible>
+                        </control>
+                    </control>
+                </control>
+
+	            <!-- OSD Back -->
+                <control type="image">
+                    <posx>324</posx>
+                    <posy>500</posy>
+                    <width>188</width>
+                    <height>59</height>
+                    <texture>dialogs/video-info/osd-back.png</texture>
+                    <animation effect="fade" start="100" end="0" time="300" tween="sine" easing="inout" condition="![Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105)]">Conditional</animation>
+                    <include>visiblehidefade</include>
+                    <visible>Player.HasVideo</visible>
+                </control>
+
+                <control type="group" id="9336">
+                    <posx>329</posx>
+                    <posy>500</posy>
+                    <width>177</width>
+                    <height>59</height>
+                    <animation effect="fade" start="100" end="0" time="300" tween="sine" easing="inout" condition="![Control.HasFocus(1101) | Control.HasFocus(1104) | Control.HasFocus(1105)]">Conditional</animation>
+                    <control type="button" id="1101">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>59</width>
+                        <height>59</height>
+                        <onleft>1105</onleft>
+                        <onright>1104</onright>
+                        <onup>9333</onup>
+                        <ondown>9333</ondown>
+                        <onclick>PlayerControl(Stop)</onclick>
+                        <onclick>SetFocus(9333)</onclick>
+                        <texturefocus>dialogs/video-info/osd-stop.png</texturefocus>
+                        <texturenofocus>dialogs/video-info/osd-stop-nf.png</texturenofocus>
+                        <visible>Player.HasVideo</visible>
+                        <enable>Player.HasVideo</enable>
+                    </control>
+                    <control type="togglebutton" id="1104">
+                        <posx>59</posx>
+                        <posy>0</posy>
+                        <width>59</width>
+                        <height>59</height>
+                        <onleft>1101</onleft>
+                        <onright>1105</onright>
+                        <onup>9333</onup>
+                        <ondown>9333</ondown>
+                        <onclick>PlayerControl(Play)</onclick>
+                        <texturefocus>dialogs/video-info/osd-play.png</texturefocus>
+                        <texturenofocus>dialogs/video-info/osd-play-nf.png</texturenofocus>
+                        <alttexturefocus>dialogs/video-info/osd-pause.png</alttexturefocus>
+                        <alttexturenofocus>dialogs/video-info/osd-pause-nf.png</alttexturenofocus>
+                        <usealttexture>!Player.IsPaused</usealttexture>
+                        <visible>Player.HasVideo</visible>
+                        <enable>Player.HasVideo</enable>
+                    </control>
+                    <control type="button" id="1105">
+                        <posx>118</posx>
+                        <posy>0</posy>
+                        <width>59</width>
+                        <height>59</height>
+                        <onleft>1104</onleft>
+                        <onright>1101</onright>
+                        <onup>9333</onup>
+                        <ondown>9333</ondown>
+                        <onclick>Action(fullscreen)</onclick>
+                        <texturefocus>dialogs/video-info/osd-fs.png</texturefocus>
+                        <texturenofocus>dialogs/video-info/osd-fs-nf.png</texturenofocus>
+                        <visible>Player.HasVideo</visible>
+                        <enable>Player.HasVideo</enable>
+                    </control>
+                </control>
             </control>
 
             <!-- Cast Stuff -->
@@ -967,9 +1008,8 @@
                         <width>1180</width>
                         <height>660</height>
                         <onleft>SetFocus(9335)</onleft>
-                        <onright condition="[!System.HasAddon(script.metadata.actors) | !IsEmpty(Window(Home).Property(script.metadata.actors.isactive)) | Container.Content(musicvideos)] + !Window.IsVisible(3009)">SetProperty(BounceRight,1,Home)</onright>
-                        <onright condition="System.HasAddon(script.metadata.actors) + IsEmpty(Window(Home).Property(script.metadata.actors.isactive)) + !Container.Content(musicvideos)">SetProperty(script.metadata.actors.push,1,home)</onright>
-                        <onright condition="System.HasAddon(script.metadata.actors) + IsEmpty(Window(Home).Property(script.metadata.actors.isactive)) + !Container.Content(musicvideos)">RunScript(script.metadata.actors,$INFO[Container(50).ListItem.Label])</onright>
+                        <onright condition="!System.HasAddon(script.extendedinfo)">SetProperty(BounceRight,1,Home)</onright>
+                        <onright condition="System.HasAddon(script.extendedinfo)">RunScript(script.extendedinfo,info=extendedactorinfo,name=$INFO[Container(50).ListItem.Label])</onright>
                         <onup>50</onup>
                         <ondown>50</ondown>
                         <pagecontrol>151</pagecontrol>

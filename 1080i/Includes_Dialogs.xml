@@ -1979,7 +1979,7 @@
                     <width>317</width>
                     <height>478</height>
                     <aspectratio>keep</aspectratio>
-                    <texture>$INFO[ListItem.ActualIcon,dialogs/filebrowser/icons/,]</texture>
+                    <texture>$INFO[ListItem.Icon]</texture>
                     <visible>IsEmpty(Container(450).ListItem.Thumb)</visible>
                 </control>
                 

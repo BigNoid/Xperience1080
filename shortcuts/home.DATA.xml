@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<shortcuts>
+	<shortcut>
+		<label>$LOCALIZE[41450]</label>
+		<label2></label2>
+		<icon>windows/home/icons/video.png</icon>
+		<action>ActivateWindow(videos,RecentlyAddedMovies,return)</action>
+		<defaultID>1</defaultID>
+	</shortcut>
+	<shortcut>
+		<label>$LOCALIZE[41451]</label>
+		<label2></label2>
+		<icon>windows/home/icons/tvshows.png</icon>
+		<action>ActivateWindow(videos,RecentlyAddedEpisodes,return)</action>
+		<defaultID>2</defaultID>
+	</shortcut>
+</shortcuts>

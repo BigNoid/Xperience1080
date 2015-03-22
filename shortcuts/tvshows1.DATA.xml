@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<shortcuts>
+	<shortcut>
+		<label>$LOCALIZE[41446]</label>
+		<label2>$INFO[Window.Property(TVShows.Count)]</label2>
+		<icon>windows/home/icons/tvshows.png</icon>
+		<action>ActivateWindow(videos,recentlyaddedepisodes,return)</action>
+		<defaultID>1</defaultID>
+	</shortcut>
+	<shortcut>
+		<label>$LOCALIZE[42160]</label>
+		<label2>$INFO[Window.Property(NextAired.TodayTotal)]</label2>
+		<icon>windows/home/icons/tvguide.png</icon>
+		<action>RunAddon(script.tv.show.next.aired)</action>
+		<defaultID>2</defaultID>
+	</shortcut>
+</shortcuts>
